@@ -1,6 +1,6 @@
 {
-  "latest_version": 4,
+  "latest_version": 5,
   "update_title": "New Update Available!",
   "update_message": "We have added exciting new features:\n1. New modern UI & UX design\n2. Added Arabic-only play option\n3. Added auto scrolling feature for ayah display\n4. Highlight current waqt\n. New Added Mazhab Selection Option.",
-  "download_url": "https://github.com/Salimtech353/Prayer/releases/download/v1.0.4/prayer_v1.0.4.apk"
+  "download_url": "https://github.com/Salimtech353/Prayer/releases/download/v1.0.5/prayer_v1.0.5.apk"
 }
