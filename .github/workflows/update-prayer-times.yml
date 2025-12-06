@@ -1,51 +1,45 @@
 name: Update Prayer Times Daily
 
------------------------------
-
-কখন চলবে
-
------------------------------
-
+# -----------------------------
+# কখন চলবে
+# -----------------------------
 on:
-schedule:
-- cron: '0 0 * * *'  # প্রতিদিন রাত 12 টায় UTC
-workflow_dispatch:   # ম্যানুয়ালি চালানোর অপশন
+  schedule:
+    - cron: '0 0 * * *'   # UTC midnight, Bangladesh local time adjust করতে পারেন
+  workflow_dispatch:      # Manual trigger option
 
------------------------------
-
-Jobs
-
------------------------------
-
+# -----------------------------
+# Jobs
+# -----------------------------
 jobs:
-update-json:
-runs-on: ubuntu-latest
+  update-json:
+    runs-on: ubuntu-latest
 
-steps:  
-# 1️⃣ Repo checkout  
-- name: Checkout repository  
-  uses: actions/checkout@v3  
+    steps:
+      # 1️⃣ Repo checkout
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-# 2️⃣ Python setup  
-- name: Setup Python  
-  uses: actions/setup-python@v4  
-  with:  
-    python-version: '3.x'  
+      # 2️⃣ Python setup
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-# 3️⃣ Dependencies install  
-- name: Install dependencies  
-  run: |  
-    pip install praytimes hijri-converter  
+      # 3️⃣ Dependencies install
+      - name: Install dependencies
+        run: |
+          pip install praytimes hijri-converter
 
-# 4️⃣ Run Python script  
-- name: Run Python script  
-  run: python generate_prayer_times.py  
+      # 4️⃣ Run Python script
+      - name: Run Python script
+        run: python generate_prayer_times.py
 
-# 5️⃣ Commit & push updated JSON  
-- name: Commit and push updated JSON  
-  run: |  
-    git config --local user.name "github-actions[bot]"  
-    git config --local user.email "github-actions[bot]@users.noreply.github.com"  
-    git add prayer-timings.json  
-    git commit -m "Daily update of prayer timings" || echo "No changes to commit"  
-    git push
+      # 5️⃣ Commit & push updated JSON
+      - name: Commit and push updated JSON
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add prayer-timings.json
+          git commit -m "Daily update of prayer timings" || echo "No changes to commit"
+          git push
